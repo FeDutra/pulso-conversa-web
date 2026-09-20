@@ -142,9 +142,10 @@ Please see LICENSE files in the repository root for full details.
         display: none;
     }
 
-    .mx_AuthPage_modalContent {
+    .mx_AuthPage_modal.mx_AuthPage_modal_withBlur .mx_AuthPage_modalContent {
         min-height: 430px;
         border-radius: 0 !important;
+        background-color: transparent;
     }
 
     .mx_AuthHeader {
@@ -191,6 +192,14 @@ Please see LICENSE files in the repository root for full details.
 
     .mx_Field {
         margin: 20px 0 0;
+        border: 0;
+        border-bottom: 1px solid rgb(251, 249, 245, 0.19);
+        border-radius: 0;
+    }
+
+    .mx_Field:focus-within {
+        border-color: rgb(251, 249, 245, 0.58);
+        filter: drop-shadow(0 7px 13px rgb(251, 249, 245, 0.045));
     }
 
     .mx_Field input,
@@ -200,21 +209,19 @@ Please see LICENSE files in the repository root for full details.
         min-height: 46px;
         padding: 12px 0 6px;
         border: 0;
-        border-bottom: 1px solid rgb(251, 249, 245, 0.19);
+        border-bottom: 0;
         border-radius: 0;
         color: var(--fio-foreground);
         background: transparent;
         font-size: 13px;
         font-weight: 300;
-        transition: border-color 220ms ease, filter 220ms ease;
+        transition: color 220ms ease;
     }
 
     .mx_Field input:focus,
     .mx_AuthBody .mx_Field input:focus {
-        border-color: rgb(251, 249, 245, 0.58);
         outline: none;
         box-shadow: none;
-        filter: drop-shadow(0 7px 13px rgb(251, 249, 245, 0.045));
     }
 
     .mx_Field label,
