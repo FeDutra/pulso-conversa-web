@@ -14,6 +14,16 @@ export default class AuthHeaderLogo extends React.PureComponent {
     public render(): React.ReactElement {
         const brandingConfig = SdkConfig.getObject("branding");
         const logoUrl = brandingConfig?.get("auth_header_logo_url") ?? "themes/element/img/logos/element-logo.svg";
+        const isFio = SdkConfig.get("brand") === "FIO";
+
+        if (isFio) {
+            return (
+                <aside className="mx_AuthHeaderLogo mx_AuthHeaderLogo--fio" aria-label="FIO">
+                    <span className="fio_AuthWordmark">fio</span>
+                    <span className="fio_AuthWordmarkMeta">instrumento pulso</span>
+                </aside>
+            );
+        }
 
         return (
             <aside className="mx_AuthHeaderLogo">

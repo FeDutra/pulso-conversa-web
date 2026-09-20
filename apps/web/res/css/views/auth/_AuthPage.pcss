@@ -39,3 +39,332 @@ Please see LICENSE files in the repository root for full details.
         }
     }
 }
+
+/*
+ * FIO is an instrument of PULSO. Matrix remains the communication substrate,
+ * while the threshold experience follows PULSO's own visual grammar.
+ */
+.mx_AuthPage--fio {
+    --fio-background: #0f0f0f;
+    --fio-foreground: #fbf9f5;
+    --fio-carmine: #b8283e;
+    --fio-hairline: rgb(251, 249, 245, 0.14);
+    --fio-muted: rgb(251, 249, 245, 0.42);
+
+    position: relative;
+    isolation: isolate;
+    justify-content: center;
+    min-height: 100dvh;
+    height: 100dvh;
+    overflow: hidden;
+    color: var(--fio-foreground);
+    background:
+        radial-gradient(circle at 50% 48%, rgb(251, 249, 245, 0.025), transparent 34%),
+        var(--fio-background);
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        pointer-events: none;
+        opacity: 0.18;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.15'/%3E%3C/svg%3E");
+        mix-blend-mode: soft-light;
+    }
+
+    .fio_AuthAtmosphere {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    .fio_AuthAtmosphereThread {
+        position: absolute;
+        display: block;
+        background: linear-gradient(90deg, transparent, var(--fio-hairline), transparent);
+        opacity: 0;
+        animation: fio-threshold-reveal 1600ms ease-out 180ms forwards;
+    }
+
+    .fio_AuthAtmosphereThread--horizontal {
+        top: 50%;
+        left: 8vw;
+        right: 8vw;
+        height: 1px;
+    }
+
+    .fio_AuthAtmosphereThread--vertical {
+        top: 8vh;
+        bottom: 8vh;
+        left: 50%;
+        width: 1px;
+        background: linear-gradient(180deg, transparent, rgb(251, 249, 245, 0.07), transparent);
+    }
+
+    .fio_AuthAtmosphereMark,
+    .fio_AuthAtmosphereCaption {
+        position: absolute;
+        top: 28px;
+        color: rgb(251, 249, 245, 0.34);
+        font-size: 9px;
+        font-weight: 300;
+        letter-spacing: 0.28em;
+        text-transform: lowercase;
+    }
+
+    .fio_AuthAtmosphereMark {
+        left: 32px;
+        color: rgb(251, 249, 245, 0.62);
+    }
+
+    .fio_AuthAtmosphereCaption {
+        right: 32px;
+    }
+
+    .mx_AuthPage_modal {
+        width: min(760px, calc(100vw - 48px));
+        margin: 0 auto;
+        border-radius: 0;
+        border: 1px solid rgb(251, 249, 245, 0.12);
+        background: rgb(15, 15, 15, 0.82) !important;
+        box-shadow: 0 36px 120px rgb(0, 0, 0, 0.48);
+        backdrop-filter: blur(26px);
+        -webkit-backdrop-filter: blur(26px);
+        opacity: 0;
+        transform: translateY(12px);
+        animation: fio-threshold-arrive 900ms ease-out 80ms forwards;
+    }
+
+    .mx_AuthPage_modalBlur {
+        display: none;
+    }
+
+    .mx_AuthPage_modalContent {
+        min-height: 430px;
+        border-radius: 0 !important;
+    }
+
+    .mx_AuthHeader {
+        position: relative;
+        width: 240px;
+        padding: 42px 34px;
+        border-right: 1px solid var(--fio-hairline);
+    }
+
+    .mx_AuthBody {
+        width: 520px;
+        padding: 54px 64px;
+        border-radius: 0;
+        color: var(--fio-muted);
+        background: transparent;
+    }
+
+    .mx_AuthBody h1 {
+        margin: 0 0 36px;
+        color: var(--fio-foreground);
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+    }
+
+    .mx_AuthBody h1::before {
+        content: "[ ";
+        color: var(--fio-muted);
+    }
+
+    .mx_AuthBody h1::after {
+        content: " ]";
+        color: var(--fio-muted);
+    }
+
+    .mx_ServerPicker,
+    .mx_ServerPicker_server {
+        color: var(--fio-muted);
+        font-size: 9px;
+        letter-spacing: 0.12em;
+        text-transform: lowercase;
+    }
+
+    .mx_Field {
+        margin: 20px 0 0;
+    }
+
+    .mx_Field input,
+    .mx_AuthBody .mx_Field input,
+    .mx_AuthBody input[type="text"],
+    .mx_AuthBody input[type="password"] {
+        min-height: 46px;
+        padding: 12px 0 6px;
+        border: 0;
+        border-bottom: 1px solid rgb(251, 249, 245, 0.19);
+        border-radius: 0;
+        color: var(--fio-foreground);
+        background: transparent;
+        font-size: 13px;
+        font-weight: 300;
+        transition: border-color 220ms ease, filter 220ms ease;
+    }
+
+    .mx_Field input:focus,
+    .mx_AuthBody .mx_Field input:focus {
+        border-color: rgb(251, 249, 245, 0.58);
+        outline: none;
+        box-shadow: none;
+        filter: drop-shadow(0 7px 13px rgb(251, 249, 245, 0.045));
+    }
+
+    .mx_Field label,
+    .mx_AuthBody .mx_Field label {
+        padding: 0;
+        color: rgb(251, 249, 245, 0.32);
+        background: transparent !important;
+        font-size: 8px;
+        font-weight: 400;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+    }
+
+    .mx_Login_submit,
+    .mx_AccessibleButton_kind_primary {
+        min-height: 42px;
+        margin-top: 30px;
+        border: 1px solid rgb(251, 249, 245, 0.22);
+        border-radius: 999px;
+        color: var(--fio-foreground);
+        background: transparent;
+        font-size: 9px;
+        font-weight: 500;
+        letter-spacing: 0.18em;
+        text-transform: lowercase;
+        transition: color 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+    }
+
+    .mx_Login_submit:hover,
+    .mx_AccessibleButton_kind_primary:hover {
+        border-color: rgb(184, 40, 62, 0.58);
+        color: #fff;
+        background: transparent;
+        box-shadow: 0 0 18px rgb(184, 40, 62, 0.16);
+    }
+
+    .mx_AuthFooter {
+        position: absolute;
+        bottom: 22px;
+        left: 0;
+        padding: 0;
+        color: rgb(251, 249, 245, 0.24);
+        background: none;
+        font-size: 8px;
+        letter-spacing: 0.18em;
+        text-transform: lowercase;
+    }
+
+    .mx_AuthFooter a:link,
+    .mx_AuthFooter a:hover,
+    .mx_AuthFooter a:visited {
+        color: inherit;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .fio_AuthAtmosphereThread,
+        .mx_AuthPage_modal {
+            opacity: 1;
+            transform: none;
+            animation: none;
+        }
+    }
+
+    @media only screen and (max-width: 600px) {
+        justify-content: flex-start;
+        overflow-y: auto;
+
+        .fio_AuthAtmosphereMark,
+        .fio_AuthAtmosphereCaption {
+            top: 22px;
+        }
+
+        .fio_AuthAtmosphereMark {
+            left: 20px;
+        }
+
+        .fio_AuthAtmosphereCaption {
+            right: 20px;
+            max-width: 48vw;
+            text-align: right;
+        }
+
+        .fio_AuthAtmosphereThread--horizontal {
+            left: 20px;
+            right: 20px;
+        }
+
+        .mx_AuthPage_modal {
+            width: calc(100vw - 40px);
+            margin: 104px 20px 84px;
+        }
+
+        .mx_AuthPage_modalContent {
+            display: block !important;
+            min-height: auto;
+        }
+
+        .mx_AuthHeader {
+            display: block;
+            width: auto;
+            padding: 30px 28px 8px;
+            border-right: 0;
+        }
+
+        .mx_AuthBody {
+            width: 100%;
+            padding: 22px 28px 38px;
+        }
+
+        .mx_AuthBody h1 {
+            margin-bottom: 28px;
+        }
+    }
+}
+
+.mx_AuthPage--fio .mx_AuthHeaderLogo--fio {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.fio_AuthWordmark {
+    color: #fbf9f5;
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: lowercase;
+}
+
+.fio_AuthWordmarkMeta {
+    margin-top: 12px;
+    color: rgb(251, 249, 245, 0.3);
+    font-size: 8px;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+
+@keyframes fio-threshold-arrive {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fio-threshold-reveal {
+    to {
+        opacity: 1;
+    }
+}

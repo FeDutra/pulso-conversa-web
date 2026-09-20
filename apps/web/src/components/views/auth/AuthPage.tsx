@@ -44,8 +44,9 @@ export default class AuthPage extends React.PureComponent<React.PropsWithChildre
     }
 
     public render(): React.ReactElement {
+        const isFio = SdkConfig.get("brand") === "FIO";
         const pageStyle = {
-            background: `center/cover fixed url(${AuthPage.getWelcomeBackgroundUrl()})`,
+            background: isFio ? undefined : `center/cover fixed url(${AuthPage.getWelcomeBackgroundUrl()})`,
         };
 
         const modalStyle: React.CSSProperties = {
@@ -82,7 +83,15 @@ export default class AuthPage extends React.PureComponent<React.PropsWithChildre
         });
 
         return (
-            <div className="mx_AuthPage" style={pageStyle}>
+            <div className={classNames("mx_AuthPage", { "mx_AuthPage--fio": isFio })} style={pageStyle}>
+                {isFio && (
+                    <div className="fio_AuthAtmosphere" aria-hidden="true">
+                        <span className="fio_AuthAtmosphereThread fio_AuthAtmosphereThread--horizontal" />
+                        <span className="fio_AuthAtmosphereThread fio_AuthAtmosphereThread--vertical" />
+                        <span className="fio_AuthAtmosphereMark">[ fio ]</span>
+                        <span className="fio_AuthAtmosphereCaption">pulso · comunicação soberana</span>
+                    </div>
+                )}
                 <div className={modalClasses} style={modalStyle}>
                     {modalBlur}
                     <main
