@@ -582,8 +582,8 @@
         "suggestions": "Sugestões",
         "support": "Suporte",
         "theme": "Tema",
-        "thread": "Tópico",
-        "threads": "Tópicos",
+        "thread": "Resposta",
+        "threads": "Respostas",
         "timeline": "Conversas",
         "unavailable": "indisponível",
         "unencrypted": "Descriptografada",
@@ -1757,9 +1757,9 @@
         "unreachable": "Servidor do usuário inacessível"
     },
     "quick_settings": {
-        "all_settings": "Todas as configurações",
+        "all_settings": "Abrir ajustes",
         "sidebar_settings": "Mais opções",
-        "title": "Configurações rápidas"
+        "title": "Ajustes"
     },
     "quit_warning": {
         "call_in_progress": "Parece que você está em uma chamada. Tem certeza que quer sair?",
@@ -2056,6 +2056,12 @@
             "leave_room": "Sair da sala"
         },
         "notification_options": "Alterar notificações",
+        "section": {
+            "chats": "Fios",
+            "favourites": "Guardados",
+            "invites": "Limiares",
+            "low_priority": "Silenciados"
+        },
         "show_less": "Mostrar menos"
     },
     "room_settings": {
