@@ -102,7 +102,10 @@ export async function loadConfig(): Promise<void> {
 }
 
 export async function loadLanguage(): Promise<void> {
-    const prefLang = SettingsStore.getValue("language", null, /*excludeDefault=*/ true);
+    // Honour the deployment-level language in config.json. FIO is a Brazilian
+    // Portuguese product; browser locale is only a fallback when no product
+    // language has been configured.
+    const prefLang = SettingsStore.getValue("language", null);
     let langs: string[] = [];
 
     if (!prefLang) {
