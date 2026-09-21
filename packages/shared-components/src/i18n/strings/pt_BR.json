@@ -44,6 +44,19 @@
         }
     },
     "room_list": {
+        "a11y": {
+            "default": "Abrir fio %(roomName)s",
+            "invitation": "Abrir o limiar de %(roomName)s.",
+            "mention": {
+                "one": "Abrir fio %(roomName)s com um chamado novo.",
+                "other": "Abrir fio %(roomName)s com %(count)s chamados novos."
+            },
+            "unread": {
+                "one": "Abrir fio %(roomName)s com uma mensagem nova.",
+                "other": "Abrir fio %(roomName)s com %(count)s mensagens novas."
+            }
+        },
+        "collapse_all_sections": "Recolher todas as seções",
         "collapse_filters": "Recolher filtros",
         "empty_filter": {
             "no_chats": "Nenhum fio por aqui.",
@@ -71,8 +84,14 @@
             "unread": "Novos"
         },
         "list_title": "Fios",
+        "room": {
+            "more_options": "Mais gestos"
+        },
         "primary_filters": "Filtros dos fios",
-        "room_options": "Gestos do fio"
+        "room_options": "Gestos do fio",
+        "section_header": {
+            "toggle": "Abrir ou recolher %(section)s"
+        }
     },
     "time": {
         "about_day_ago": "há aproximadamente um dia",
