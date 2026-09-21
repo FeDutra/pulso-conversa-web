@@ -12,14 +12,9 @@ import { TestSDKContext } from "test-utils";
 
 import { RoomListSearchViewModel } from "./RoomListSearchViewModel";
 import { MetaSpace } from "../../stores/spaces";
-import { shouldShowComponent } from "../../customisations/helpers/UIComponents";
 import defaultDispatcher from "../../dispatcher/dispatcher";
 import { Action } from "../../dispatcher/actions";
 import LegacyCallHandler, { LegacyCallHandlerEvent } from "../../LegacyCallHandler";
-
-vi.mock("../../customisations/helpers/UIComponents", () => ({
-    shouldShowComponent: vi.fn(),
-}));
 
 vi.mock("../../PosthogTrackers", () => ({
     default: {
@@ -31,7 +26,6 @@ describe("RoomListSearchViewModel", () => {
     const context = new TestSDKContext();
 
     beforeEach(() => {
-        vi.mocked(shouldShowComponent).mockReturnValue(true);
         context._LegacyCallHandler = new LegacyCallHandler(context);
         vi.spyOn(context._LegacyCallHandler, "getSupportsPstnProtocol").mockReturnValue(false);
     });
@@ -41,30 +35,18 @@ describe("RoomListSearchViewModel", () => {
     });
 
     describe("snapshot", () => {
-        it("should show explore button in Home space when UIComponent.ExploreRooms is enabled", () => {
-            vi.mocked(shouldShowComponent).mockReturnValue(true);
+        it("should keep the public room directory hidden in the private FIO circle", () => {
             const vm = new RoomListSearchViewModel({
                 activeSpace: MetaSpace.Home,
-                legacyCallHandler: context.legacyCallHandler,
-            });
-
-            expect(vm.getSnapshot().displayExploreButton).toBe(true);
-        });
-
-        it("should hide explore button when not in Home space", () => {
-            vi.mocked(shouldShowComponent).mockReturnValue(true);
-            const vm = new RoomListSearchViewModel({
-                activeSpace: MetaSpace.VideoRooms,
                 legacyCallHandler: context.legacyCallHandler,
             });
 
             expect(vm.getSnapshot().displayExploreButton).toBe(false);
         });
 
-        it("should hide explore button when UIComponent.ExploreRooms is disabled", () => {
-            vi.mocked(shouldShowComponent).mockReturnValue(false);
+        it("should hide explore button when not in Home space", () => {
             const vm = new RoomListSearchViewModel({
-                activeSpace: MetaSpace.Home,
+                activeSpace: MetaSpace.VideoRooms,
                 legacyCallHandler: context.legacyCallHandler,
             });
 

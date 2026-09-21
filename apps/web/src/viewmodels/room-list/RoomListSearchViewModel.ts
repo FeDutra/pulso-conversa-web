@@ -15,9 +15,6 @@ import {
 import { IS_MAC, Key } from "../../Keyboard";
 import { _t } from "../../languageHandler";
 import { ALTERNATE_KEY_NAME } from "../../accessibility/KeyboardShortcuts";
-import { shouldShowComponent } from "../../customisations/helpers/UIComponents";
-import { UIComponent } from "../../settings/UIFeature";
-import { MetaSpace } from "../../stores/spaces";
 import { Action } from "../../dispatcher/actions";
 import PosthogTrackers from "../../PosthogTrackers";
 import defaultDispatcher from "../../dispatcher/dispatcher";
@@ -54,7 +51,9 @@ export class RoomListSearchViewModel
         activeSpace: string,
         supportsPstn: boolean,
     ): RoomListSearchViewSnapshot => {
-        const displayExploreButton = activeSpace === MetaSpace.Home && shouldShowComponent(UIComponent.ExploreRooms);
+        // FIO is a private family circle. A public room directory contradicts
+        // the product's trust model, even when the Matrix substrate supports it.
+        const displayExploreButton = false;
         const searchShortcut = IS_MAC ? "⌘ K" : _t(ALTERNATE_KEY_NAME[Key.CONTROL]) + " K";
         return {
             displayExploreButton,
