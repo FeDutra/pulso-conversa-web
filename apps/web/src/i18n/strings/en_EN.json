@@ -1,4 +1,27 @@
 {
+    "fio": {
+        "activity": {
+            "no_signals": "There are no new signals.",
+            "no_unread": "Nothing is waiting for you.",
+            "title": "Signals"
+        },
+        "invite": {
+            "circle_title": "A circle is opening: %(roomName)s",
+            "enter": "Enter the circle",
+            "keep_closed": "Keep closed",
+            "open": "Open the threshold",
+            "title": "A threshold has opened"
+        },
+        "settings": {
+            "devices": "Devices",
+            "identity": "Identity",
+            "privacy": "Privacy",
+            "seal": "Seal",
+            "signals": "Signals",
+            "title": "FIO adjustments",
+            "voice": "Voice and presence"
+        }
+    },
     "a11y": {
         "jump_first_invite": "Jump to first invite.",
         "message_composer": "Message composer",

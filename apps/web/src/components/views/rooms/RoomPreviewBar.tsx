@@ -27,6 +27,7 @@ import SettingsStore from "../../../settings/SettingsStore";
 import { UIFeature } from "../../../settings/UIFeature";
 import Field from "../elements/Field";
 import { ModuleApi } from "../../../modules/Api.ts";
+import { isFioBranded } from "../../../branding.ts";
 
 const MemberEventHtmlReasonField = "io.element.html_reason";
 
@@ -488,6 +489,7 @@ class RoomPreviewBar extends React.Component<IProps, IState> {
             }
             case MessageCase.Invite: {
                 const isDM = this.isDMInvite();
+                const isFio = isFioBranded();
                 const avatar = <RoomAvatar room={this.props.room} oobData={this.props.oobData} />;
 
                 const inviteMember = this.getInviteMember();
@@ -511,13 +513,15 @@ class RoomPreviewBar extends React.Component<IProps, IState> {
                 );
 
                 if (isDM) {
-                    title = _t("room|dm_invite_title", {
-                        user: inviteMember?.name ?? this.props.inviterName,
-                    });
-                    primaryActionLabel = _t("room|dm_invite_action");
+                    title = isFio
+                        ? _t("fio|invite|title")
+                        : _t("room|dm_invite_title", {
+                              user: inviteMember?.name ?? this.props.inviterName,
+                          });
+                    primaryActionLabel = isFio ? _t("fio|invite|open") : _t("room|dm_invite_action");
                 } else {
-                    title = _t("room|invite_title", { roomName });
-                    primaryActionLabel = _t("action|accept");
+                    title = isFio ? _t("fio|invite|circle_title", { roomName }) : _t("room|invite_title", { roomName });
+                    primaryActionLabel = isFio ? _t("fio|invite|enter") : _t("action|accept");
                 }
                 subTitle = [avatar, inviterElement];
 
@@ -535,7 +539,7 @@ class RoomPreviewBar extends React.Component<IProps, IState> {
                 }
 
                 primaryActionHandler = this.props.onJoinClick;
-                secondaryActionLabel = _t("action|decline");
+                secondaryActionLabel = isFio ? _t("fio|invite|keep_closed") : _t("action|decline");
                 secondaryActionHandler = this.props.onDeclineClick;
                 dangerActionLabel = _t("action|decline_and_block");
                 dangerActionHandler = this.props.onDeclineAndBlockClick;
@@ -687,6 +691,8 @@ class RoomPreviewBar extends React.Component<IProps, IState> {
         const classes = classNames("mx_RoomPreviewBar", `mx_RoomPreviewBar_${messageCase}`, {
             mx_RoomPreviewBar_panel: isPanel,
             mx_RoomPreviewBar_dialog: !isPanel,
+            fio_RoomPreviewBar: isFioBranded(),
+            fio_RoomPreviewBar_invite: isFioBranded() && messageCase === MessageCase.Invite,
         });
 
         // ensure correct tab order for both views

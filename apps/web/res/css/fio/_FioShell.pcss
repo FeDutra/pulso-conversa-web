@@ -132,6 +132,255 @@
     color: var(--fio-foreground);
 }
 
+/* The instrument owns every surface, including overlays rendered outside MatrixChat. */
+.mx_Dialog_wrapper,
+.mx_ContextualMenu,
+[role="menu"] {
+    color: var(--fio-foreground);
+}
+
+.mx_Dialog_background {
+    background: rgb(4 4 4 / 78%);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.mx_Dialog,
+.mx_ContextualMenu,
+[role="menu"] {
+    border: 1px solid var(--fio-hairline-strong);
+    border-radius: 0;
+    background: rgb(15 15 15 / 97%);
+    box-shadow: 0 28px 100px rgb(0 0 0 / 52%);
+}
+
+.mx_Dialog_title,
+.mx_Dialog h1,
+.mx_Dialog h2,
+.mx_Dialog h3 {
+    color: var(--fio-foreground);
+    font-family: Outfit, Inter, system-ui, sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+}
+
+.mx_Dialog p,
+.mx_Dialog label,
+.mx_Dialog .mx_SettingsTab_subheading,
+.mx_Dialog .mx_SettingsTab_subsectionText {
+    color: var(--fio-muted);
+}
+
+.mx_Dialog input,
+.mx_Dialog textarea,
+.mx_Dialog select,
+.mx_Field,
+.mx_Field input,
+.mx_Field textarea,
+.mx_Field select {
+    color: var(--fio-foreground);
+    border-color: var(--fio-hairline-strong);
+    border-radius: 0;
+    background: rgb(251 249 245 / 2%);
+    box-shadow: none;
+}
+
+.mx_Field:focus-within,
+.mx_Dialog input:focus,
+.mx_Dialog textarea:focus,
+.mx_Dialog select:focus {
+    border-color: rgb(251 249 245 / 46%);
+    box-shadow: 0 1px 0 rgb(184 40 62 / 58%);
+    outline: none;
+}
+
+.mx_Dialog button,
+.mx_Dialog [role="button"],
+.mx_ContextualMenu button,
+.mx_ContextualMenu [role="button"] {
+    border-radius: 0;
+    font-weight: 400;
+    transition:
+        color 180ms ease,
+        background 180ms ease,
+        border-color 180ms ease;
+}
+
+.mx_Dialog button:hover,
+.mx_Dialog [role="button"]:hover,
+.mx_ContextualMenu button:hover,
+.mx_ContextualMenu [role="button"]:hover {
+    background: linear-gradient(90deg, rgb(184 40 62 / 8%), transparent 76%);
+}
+
+.fio_RoomPreviewBar_invite {
+    position: relative;
+    width: min(620px, calc(100vw - 40px));
+    padding: 52px 48px;
+    border: 0;
+    border-top: 1px solid var(--fio-hairline-strong);
+    border-bottom: 1px solid var(--fio-hairline-strong);
+    border-radius: 0;
+    background: transparent;
+}
+
+.fio_RoomPreviewBar_invite::before {
+    content: "[ LIMIAR ]";
+    margin-bottom: 38px;
+    color: var(--fio-muted);
+    font-size: 9px;
+    letter-spacing: 0.28em;
+}
+
+.fio_RoomPreviewBar_invite h3 {
+    margin-bottom: 36px;
+    color: var(--fio-foreground);
+    font-family: Outfit, Inter, system-ui, sans-serif;
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 200;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+}
+
+.fio_RoomPreviewBar_invite .mx_RoomPreviewBar_message p {
+    color: var(--fio-muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.fio_RoomPreviewBar_invite .mx_RoomPreviewBar_actions {
+    width: min(100%, 420px);
+    margin-top: 28px;
+}
+
+.fio_RoomPreviewBar_invite .mx_AccessibleButton,
+.fio_RoomPreviewBar_invite button {
+    min-height: 48px;
+    border-bottom: 1px solid var(--fio-hairline);
+    background: transparent;
+}
+
+.fio_RoomPreviewBar_invite .mx_AccessibleButton_kind_primary {
+    color: var(--fio-foreground);
+    border-color: rgb(184 40 62 / 55%);
+    background: linear-gradient(90deg, rgb(184 40 62 / 12%), transparent 72%);
+}
+
+.fio_UserSettingsDialog.mx_Dialog {
+    width: min(1120px, calc(100vw - 48px));
+    max-width: none;
+    height: min(780px, calc(100dvh - 48px));
+    padding: 32px 34px 28px;
+}
+
+.fio_UserSettingsDialog .mx_UserSettingsDialog_title {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+
+.fio_UserSettingsDialog .mx_TabbedView {
+    top: 82px;
+    padding-left: 0;
+}
+
+.fio_UserSettingsDialog .mx_TabbedView_tabsOnLeft .mx_TabbedView_tabLabels {
+    width: 210px;
+    max-width: 210px;
+    padding-top: 12px;
+    border-right: 1px solid var(--fio-hairline);
+}
+
+.fio_UserSettingsDialog .mx_TabbedView_tabsOnLeft .mx_TabbedView_tabPanel {
+    margin-left: 252px;
+}
+
+.fio_UserSettingsDialog .mx_TabbedView_tabLabel {
+    min-height: 48px;
+    padding: 12px 18px;
+    color: var(--fio-muted);
+    border-radius: 0;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: lowercase;
+}
+
+.fio_UserSettingsDialog .mx_TabbedView_tabLabel:hover {
+    color: var(--fio-foreground);
+    background: linear-gradient(90deg, rgb(251 249 245 / 4%), transparent 76%);
+}
+
+.fio_UserSettingsDialog .mx_TabbedView_tabLabel_active {
+    color: var(--fio-foreground);
+    outline: 0;
+    background: linear-gradient(90deg, rgb(184 40 62 / 10%), transparent 78%);
+    box-shadow: inset 1px 0 0 var(--fio-carmine);
+}
+
+.fio_UserSettingsDialog .mx_TabbedView_tabLabel svg {
+    color: var(--fio-faint);
+}
+
+.fio_UserSettingsDialog .mx_SettingsTab {
+    max-width: 720px;
+    padding-right: 48px;
+}
+
+.fio_UserSettingsDialog .mx_SettingsTab h2,
+.fio_UserSettingsDialog .mx_SettingsTab h3 {
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--fio-hairline);
+}
+
+.mx_QuickSettingsButton_ContextMenuWrapper .mx_ContextualMenu,
+.mx_ThreadsActivityCentre_container [role="menu"] {
+    min-width: 280px;
+    padding: 18px;
+}
+
+.mx_QuickSettingsButton_ContextMenuWrapper h2,
+.mx_ThreadsActivityCentre_container [role="menu"] > [role="heading"] {
+    color: var(--fio-muted);
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+
+.mx_ThreadsActivityCentre_emptyCaption {
+    padding: 34px 20px;
+    color: var(--fio-muted);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+@media (max-width: 760px) {
+    .fio_RoomPreviewBar_invite {
+        width: calc(100vw - 32px);
+        padding: 38px 18px;
+    }
+
+    .fio_UserSettingsDialog.mx_Dialog {
+        width: calc(100vw - 16px);
+        height: calc(100dvh - 16px);
+        padding: 22px 16px 16px;
+    }
+
+    .fio_UserSettingsDialog .mx_TabbedView_tabsOnLeft .mx_TabbedView_tabPanel {
+        margin-left: 56px;
+    }
+
+    .fio_UserSettingsDialog .mx_TabbedView_tabsOnLeft .mx_TabbedView_tabLabels {
+        width: 44px;
+    }
+
+    .fio_UserSettingsDialog .mx_SettingsTab {
+        min-width: 0;
+        padding-right: 12px;
+    }
+}
+
 .mx_HomePage.mx_HomePage_default {
     display: block;
     width: 100%;

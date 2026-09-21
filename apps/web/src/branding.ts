@@ -8,6 +8,7 @@ Please see LICENSE files in the repository root for full details.
 import SdkConfig from "./SdkConfig.ts";
 
 const ELEMENT_BRAND = "Element";
+const FIO_BRAND = "FIO";
 
 /**
  * Returns whether the app is currently branded.
@@ -18,3 +19,6 @@ export const isElementBranded = (): boolean => {
     const brand = SdkConfig.get("brand");
     return brand === ELEMENT_BRAND || brand.startsWith(ELEMENT_BRAND + " ");
 };
+
+/** Returns whether the current product surface is the FIO instrument of PULSO. */
+export const isFioBranded = (): boolean => SdkConfig.get("brand") === FIO_BRAND;

@@ -1,4 +1,27 @@
 {
+    "fio": {
+        "activity": {
+            "no_signals": "Não há novos sinais.",
+            "no_unread": "Nada espera por você.",
+            "title": "Sinais"
+        },
+        "invite": {
+            "circle_title": "Um círculo se abre: %(roomName)s",
+            "enter": "Entrar no círculo",
+            "keep_closed": "Manter fechado",
+            "open": "Abrir o limiar",
+            "title": "Um limiar se abriu"
+        },
+        "settings": {
+            "devices": "Aparelhos",
+            "identity": "Identidade",
+            "privacy": "Privacidade",
+            "seal": "Selo",
+            "signals": "Sinais",
+            "title": "Ajustes do FIO",
+            "voice": "Voz e presença"
+        }
+    },
     "a11y": {
         "jump_first_invite": "Ir para o primeiro convite.",
         "message_composer": "Compositor de mensagens",

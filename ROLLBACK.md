@@ -20,3 +20,10 @@
 - Tela inicial autenticada do FIO.
 - Tratamento visual do casco Element: espaços, lista de fios, cabeçalho, conversa e compositor.
 - Nenhuma alteração em protocolo, criptografia, banco, Synapse ou identidade Matrix.
+
+## Identidade integral da plataforma
+
+- Branch de trabalho: `pulso/platform-identity`.
+- A etapa transforma convites, menus, campos, estados e ajustes; não altera Synapse, banco ou eventos Matrix.
+- Antes da publicação, preservar `/var/www/fio/config.json` e mover a versão pública atual para um snapshot datado.
+- Para reversão imediata, trocar atomicamente `/var/www/fio` pelo snapshot criado no release e validar HTML, login e `/_matrix/client/versions`.

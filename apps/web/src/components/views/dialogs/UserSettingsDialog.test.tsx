@@ -119,6 +119,30 @@ describe("<UserSettingsDialog />", () => {
         expect(container.querySelectorAll(".mx_TabbedView_tabLabel")).toMatchSnapshot();
     });
 
+    it("renders the reduced PULSO architecture for FIO", () => {
+        SdkConfig.put({ brand: "FIO", show_labs_settings: true });
+        mockSettingsStore.getValue.mockImplementation(
+            (settingName: any): any => settingName === UIFeature.Voip || settingName === "feature_mjolnir",
+        );
+
+        const { container, queryByTestId, getByTestId } = render(getComponent());
+
+        expect(container.querySelector(".fio_UserSettingsDialog")).toBeTruthy();
+        expect(getActiveTabLabel(container)).toEqual("Identity");
+        expect(getByTestId(`settings-tab-${UserTab.Account}`)).toBeTruthy();
+        expect(getByTestId(`settings-tab-${UserTab.SessionManager}`)).toBeTruthy();
+        expect(getByTestId(`settings-tab-${UserTab.Notifications}`)).toBeTruthy();
+        expect(getByTestId(`settings-tab-${UserTab.Voice}`)).toBeTruthy();
+        expect(getByTestId(`settings-tab-${UserTab.Security}`)).toBeTruthy();
+        expect(getByTestId(`settings-tab-${UserTab.Encryption}`)).toBeTruthy();
+        expect(queryByTestId(`settings-tab-${UserTab.Appearance}`)).toBeFalsy();
+        expect(queryByTestId(`settings-tab-${UserTab.Keyboard}`)).toBeFalsy();
+        expect(queryByTestId(`settings-tab-${UserTab.Sidebar}`)).toBeFalsy();
+        expect(queryByTestId(`settings-tab-${UserTab.Labs}`)).toBeFalsy();
+        expect(queryByTestId(`settings-tab-${UserTab.Mjolnir}`)).toBeFalsy();
+        expect(queryByTestId(`settings-tab-${UserTab.Help}`)).toBeFalsy();
+    });
+
     it("renders ignored users tab when feature_mjolnir is enabled", () => {
         mockSettingsStore.getValue.mockImplementation((settingName) => settingName === "feature_mjolnir");
         const { getByTestId } = render(getComponent());

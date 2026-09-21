@@ -25,6 +25,7 @@ import { getKeyBindingsManager } from "../../../../KeyBindingsManager";
 import { KeyBindingAction } from "../../../../accessibility/KeyboardShortcuts";
 import { useSettingValue } from "../../../../hooks/useSettings";
 import { SDKContext } from "../../../../contexts/SDKContext.ts";
+import { isFioBranded } from "../../../../branding.ts";
 
 interface ThreadsActivityCentreProps {
     /**
@@ -43,8 +44,8 @@ export function ThreadsActivityCentre({ displayButtonLabel }: ThreadsActivityCen
     const settingTACOnlyNotifs = useSettingValue("Notifications.tac_only_notifications");
 
     const emptyCaption = settingTACOnlyNotifs
-        ? _t("threads_activity_centre|no_rooms_with_threads_notifs")
-        : _t("threads_activity_centre|no_rooms_with_unread_threads");
+        ? _t(isFioBranded() ? "fio|activity|no_signals" : "threads_activity_centre|no_rooms_with_threads_notifs")
+        : _t(isFioBranded() ? "fio|activity|no_unread" : "threads_activity_centre|no_rooms_with_unread_threads");
 
     return (
         <div
@@ -71,7 +72,7 @@ export function ThreadsActivityCentre({ displayButtonLabel }: ThreadsActivityCen
 
                     setOpen(newOpen);
                 }}
-                title={_t("threads_activity_centre|header")}
+                title={_t(isFioBranded() ? "fio|activity|title" : "threads_activity_centre|header")}
                 trigger={
                     <ThreadsActivityCentreButton
                         displayLabel={displayButtonLabel}

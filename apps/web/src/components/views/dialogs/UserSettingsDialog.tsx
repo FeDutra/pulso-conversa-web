@@ -49,6 +49,7 @@ import { type SDKContextClass } from "../../../contexts/SDKContextClass";
 import { useSettingValue } from "../../../hooks/useSettings";
 import { NoChange, useEventEmitterAsyncState, type AsyncStateCallbackResult } from "../../../hooks/useEventEmitter";
 import { EncryptionUserSettingsTab, type State } from "../settings/tabs/user/EncryptionUserSettingsTab";
+import { isFioBranded } from "../../../branding.ts";
 
 interface IProps {
     initialTabId?: UserTab;
@@ -68,6 +69,17 @@ interface IProps {
 }
 
 function titleForTabID(tabId: UserTab): React.ReactNode {
+    if (isFioBranded()) {
+        const fioTitles: Partial<Record<UserTab, string>> = {
+            [UserTab.Account]: _t("fio|settings|identity"),
+            [UserTab.SessionManager]: _t("fio|settings|devices"),
+            [UserTab.Notifications]: _t("fio|settings|signals"),
+            [UserTab.Voice]: _t("fio|settings|voice"),
+            [UserTab.Security]: _t("fio|settings|privacy"),
+            [UserTab.Encryption]: _t("fio|settings|seal"),
+        };
+        return fioTitles[tabId] ?? _t("fio|settings|title");
+    }
     const subs = {
         strong: (sub: string) => <span className="mx_UserSettingsDialog_title_strong">{sub}</span>,
     };
@@ -131,11 +143,12 @@ export default function UserSettingsDialog(props: IProps): JSX.Element {
 
     const getTabs = (): NonEmptyArray<Tab<UserTab>> => {
         const tabs: Tab<UserTab>[] = [];
+        const isFio = isFioBranded();
 
         tabs.push(
             new Tab(
                 UserTab.Account,
-                _td("settings|account|title"),
+                isFio ? _td("fio|settings|identity") : _td("settings|account|title"),
                 <UserProfileIcon />,
                 <AccountUserSettingsTab closeSettingsFn={props.onFinished} startCustomStatus={startCustomStatus} />,
                 "UserSettingsGeneral",
@@ -144,63 +157,68 @@ export default function UserSettingsDialog(props: IProps): JSX.Element {
         tabs.push(
             new Tab(
                 UserTab.SessionManager,
-                _td("settings|sessions|title"),
+                isFio ? _td("fio|settings|devices") : _td("settings|sessions|title"),
                 <DevicesIcon />,
                 <SessionManagerTab showMsc4108QrCode={showMsc4108QrCode} />,
                 undefined,
             ),
         );
-        tabs.push(
-            new Tab(
-                UserTab.Appearance,
-                _td("common|appearance"),
-                <VisibilityOnIcon />,
-                <AppearanceUserSettingsTab />,
-                "UserSettingsAppearance",
-            ),
-        );
+        if (!isFio) {
+            tabs.push(
+                new Tab(
+                    UserTab.Appearance,
+                    _td("common|appearance"),
+                    <VisibilityOnIcon />,
+                    <AppearanceUserSettingsTab />,
+                    "UserSettingsAppearance",
+                ),
+            );
+        }
         tabs.push(
             new Tab(
                 UserTab.Notifications,
-                _td("notifications|enable_prompt_toast_title"),
+                isFio ? _td("fio|settings|signals") : _td("notifications|enable_prompt_toast_title"),
                 <NotificationsIcon />,
                 <NotificationUserSettingsTab />,
                 "UserSettingsNotifications",
             ),
         );
-        tabs.push(
-            new Tab(
-                UserTab.Preferences,
-                _td("common|preferences"),
-                <PreferencesIcon />,
-                <PreferencesUserSettingsTab />,
-                "UserSettingsPreferences",
-            ),
-        );
-        tabs.push(
-            new Tab(
-                UserTab.Keyboard,
-                _td("settings|keyboard|title"),
-                <KeyboardIcon />,
-                <KeyboardUserSettingsTab />,
-                "UserSettingsKeyboard",
-            ),
-        );
-        tabs.push(
-            new Tab(
-                UserTab.Sidebar,
-                _td("settings|sidebar|title"),
-                <SidebarIcon />,
-                <SidebarUserSettingsTab />,
-                "UserSettingsSidebar",
-            ),
-        );
+        if (!isFio)
+            tabs.push(
+                new Tab(
+                    UserTab.Preferences,
+                    _td("common|preferences"),
+                    <PreferencesIcon />,
+                    <PreferencesUserSettingsTab />,
+                    "UserSettingsPreferences",
+                ),
+            );
+        if (!isFio)
+            tabs.push(
+                new Tab(
+                    UserTab.Keyboard,
+                    _td("settings|keyboard|title"),
+                    <KeyboardIcon />,
+                    <KeyboardUserSettingsTab />,
+                    "UserSettingsKeyboard",
+                ),
+            );
+        if (!isFio)
+            tabs.push(
+                new Tab(
+                    UserTab.Sidebar,
+                    _td("settings|sidebar|title"),
+                    <SidebarIcon />,
+                    <SidebarUserSettingsTab />,
+                    "UserSettingsSidebar",
+                ),
+            );
 
         if (voipEnabled) {
             tabs.push(
                 new Tab(
                     UserTab.Voice,
-                    _td("settings|voip|title"),
+                    isFio ? _td("fio|settings|voice") : _td("settings|voip|title"),
                     <MicOnIcon />,
                     <VoiceUserSettingsTab />,
                     "UserSettingsVoiceVideo",
@@ -211,7 +229,7 @@ export default function UserSettingsDialog(props: IProps): JSX.Element {
         tabs.push(
             new Tab(
                 UserTab.Security,
-                _td("room_settings|security|title"),
+                isFio ? _td("fio|settings|privacy") : _td("room_settings|security|title"),
                 <LockIcon />,
                 <SecurityUserSettingsTab />,
                 "UserSettingsSecurityPrivacy",
@@ -221,7 +239,7 @@ export default function UserSettingsDialog(props: IProps): JSX.Element {
         tabs.push(
             new Tab(
                 UserTab.Encryption,
-                _td("settings|encryption|title"),
+                isFio ? _td("fio|settings|seal") : _td("settings|encryption|title"),
                 <KeyIcon />,
                 <EncryptionUserSettingsTab initialState={initialEncryptionState} />,
                 "UserSettingsEncryption",
@@ -229,12 +247,15 @@ export default function UserSettingsDialog(props: IProps): JSX.Element {
             ),
         );
 
-        if (showLabsFlags() || SettingsStore.getFeatureSettingNames().some((k) => SettingsStore.getBetaInfo(k))) {
+        if (
+            !isFio &&
+            (showLabsFlags() || SettingsStore.getFeatureSettingNames().some((k) => SettingsStore.getBetaInfo(k)))
+        ) {
             tabs.push(
                 new Tab(UserTab.Labs, _td("common|labs"), <LabsIcon />, <LabsUserSettingsTab />, "UserSettingsLabs"),
             );
         }
-        if (mjolnirEnabled) {
+        if (!isFio && mjolnirEnabled) {
             tabs.push(
                 new Tab(
                     UserTab.Mjolnir,
@@ -245,15 +266,17 @@ export default function UserSettingsDialog(props: IProps): JSX.Element {
                 ),
             );
         }
-        tabs.push(
-            new Tab(
-                UserTab.Help,
-                _td("setting|help_about|title"),
-                <HelpIcon />,
-                <HelpUserSettingsTab />,
-                "UserSettingsHelpAbout",
-            ),
-        );
+        if (!isFio) {
+            tabs.push(
+                new Tab(
+                    UserTab.Help,
+                    _td("setting|help_about|title"),
+                    <HelpIcon />,
+                    <HelpUserSettingsTab />,
+                    "UserSettingsHelpAbout",
+                ),
+            );
+        }
 
         return tabs as NonEmptyArray<Tab<UserTab>>;
     };
@@ -276,7 +299,9 @@ export default function UserSettingsDialog(props: IProps): JSX.Element {
         <SDKContext.Provider value={props.sdkContext}>
             <ToastContext.Provider value={toastRack}>
                 <BaseDialog
-                    className="mx_UserSettingsDialog"
+                    className={
+                        isFioBranded() ? "mx_UserSettingsDialog fio_UserSettingsDialog" : "mx_UserSettingsDialog"
+                    }
                     hasCancel={true}
                     onFinished={props.onFinished}
                     title={titleForTabID(activeTabId)}
