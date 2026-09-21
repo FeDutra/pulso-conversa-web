@@ -70,6 +70,39 @@
     filter: grayscale(1) saturate(0.2);
 }
 
+.mx_RoomListPanel [role="listbox"] {
+    gap: 0 !important;
+    padding: 0 14px 18px;
+    border-bottom: 1px solid var(--fio-hairline);
+}
+
+.mx_RoomListPanel [role="listbox"] button {
+    min-height: 30px;
+    padding: 0 12px;
+    color: var(--fio-muted);
+    border: 0;
+    border-right: 1px solid var(--fio-hairline);
+    border-radius: 0;
+    background: transparent;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: lowercase;
+}
+
+.mx_RoomListPanel [role="listbox"] button:hover,
+.mx_RoomListPanel [role="listbox"] button[aria-selected="true"] {
+    color: var(--fio-foreground);
+    background: linear-gradient(180deg, transparent, rgb(184 40 62 / 7%));
+    box-shadow: inset 0 -1px 0 rgb(184 40 62 / 62%);
+}
+
+.mx_UserMenu [role="menu"],
+.mx_UserMenu + [role="menu"] {
+    border-radius: 0;
+    background: rgb(15 15 15 / 98%);
+}
+
 .mx_RoomView,
 .mx_RoomView_body,
 .mx_RoomView_timeline,
@@ -353,6 +386,27 @@
     color: var(--fio-muted);
     font-size: 12px;
     line-height: 1.7;
+}
+
+.mx_ToastContainer .mx_Toast_toast {
+    border: 1px solid var(--fio-hairline-strong);
+    border-radius: 0;
+    color: var(--fio-foreground);
+    background: rgb(15 15 15 / 98%);
+    box-shadow: 0 22px 70px rgb(0 0 0 / 48%);
+}
+
+.mx_ToastContainer .mx_Toast_title {
+    font-family: Outfit, Inter, system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+}
+
+.mx_ToastContainer .mx_Toast_description {
+    color: var(--fio-muted);
+    font-size: 11px;
+    line-height: 1.65;
 }
 
 @media (max-width: 760px) {

@@ -19,7 +19,18 @@
             "seal": "Seal",
             "signals": "Signals",
             "title": "FIO adjustments",
-            "voice": "Voice and presence"
+            "voice": "Voice and presence",
+            "open": "Open adjustments"
+        },
+        "navigation": {
+            "all_threads": "all threads",
+            "threads": "threads"
+        },
+        "seal": {
+            "continue": "Create seal",
+            "later": "Later",
+            "verify_description": "Seal this device so encrypted conversations remain accessible and trusted.",
+            "verify_title": "This device needs a seal"
         }
     },
     "a11y": {

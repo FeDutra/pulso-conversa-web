@@ -9,6 +9,7 @@ Please see LICENSE files in the repository root for full details.
 import { type HierarchyRoom } from "matrix-js-sdk/src/matrix";
 
 import { _t } from "../../languageHandler";
+import { isFioBranded } from "../../branding.ts";
 
 // The consts & types are moved out here to prevent cyclical imports
 
@@ -28,6 +29,7 @@ export enum MetaSpace {
 export const getMetaSpaceName = (spaceKey: MetaSpace, allRoomsInHome = false): string => {
     switch (spaceKey) {
         case MetaSpace.Home:
+            if (isFioBranded()) return allRoomsInHome ? _t("fio|navigation|all_threads") : _t("fio|navigation|threads");
             return allRoomsInHome ? _t("common|all_chats") : _t("common|home");
         case MetaSpace.Orphans:
             return _t("common|orphan_rooms");

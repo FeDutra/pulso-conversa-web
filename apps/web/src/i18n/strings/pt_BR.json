@@ -19,7 +19,18 @@
             "seal": "Selo",
             "signals": "Sinais",
             "title": "Ajustes do FIO",
-            "voice": "Voz e presença"
+            "voice": "Voz e presença",
+            "open": "Abrir ajustes"
+        },
+        "navigation": {
+            "all_threads": "todos os fios",
+            "threads": "fios"
+        },
+        "seal": {
+            "continue": "Criar selo",
+            "later": "Depois",
+            "verify_description": "Sele este aparelho para que as conversas criptografadas permaneçam acessíveis e confiáveis.",
+            "verify_title": "Este aparelho precisa de um selo"
         }
     },
     "a11y": {

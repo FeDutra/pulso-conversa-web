@@ -16,6 +16,7 @@ import { getNormalizedLanguageKeys } from "@element-hq/web-shared-components";
 
 import { getLanguagesFromBrowser } from "../i18n/browser";
 import { setLanguage } from "../i18n/settings";
+import { isFioBranded } from "../branding.ts";
 import { getCurrentLanguage } from "../i18n";
 import SettingsStore from "../settings/SettingsStore";
 import PlatformPeg from "../PlatformPeg";
@@ -105,7 +106,7 @@ export async function loadLanguage(): Promise<void> {
     // Honour the deployment-level language in config.json. FIO is a Brazilian
     // Portuguese product; browser locale is only a fallback when no product
     // language has been configured.
-    const prefLang = SettingsStore.getValue("language", null);
+    const prefLang = isFioBranded() ? "pt_BR" : SettingsStore.getValue("language", null);
     let langs: string[] = [];
 
     if (!prefLang) {

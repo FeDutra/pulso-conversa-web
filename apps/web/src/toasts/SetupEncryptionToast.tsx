@@ -31,6 +31,7 @@ import { MatrixClientPeg } from "../MatrixClientPeg";
 import { resetKeyBackupAndWait } from "../utils/crypto/resetKeyBackup";
 import { PosthogAnalytics } from "../PosthogAnalytics";
 import { encryptionSettingsStateForKeyStorageOutOfSyncForgotRecovery } from "../components/views/settings/tabs/user/EncryptionUserSettingsTab.tsx";
+import { isFioBranded } from "../branding.ts";
 
 const TOAST_KEY = "setupencryption";
 
@@ -44,7 +45,7 @@ const getTitle = (state: DeviceStateForToast): string => {
         case "set_up_recovery":
             return _t("encryption|set_up_recovery");
         case "verify_this_session":
-            return _t("encryption|verify_toast_title");
+            return isFioBranded() ? _t("fio|seal|verify_title") : _t("encryption|verify_toast_title");
         case "key_storage_out_of_sync":
         case "identity_needs_reset":
             return _t("encryption|key_storage_out_of_sync");
@@ -83,7 +84,7 @@ const getSetupCaption = (state: DeviceStateForToast): string => {
         case "set_up_recovery":
             return _t("action|continue");
         case "verify_this_session":
-            return _t("action|continue");
+            return isFioBranded() ? _t("fio|seal|continue") : _t("action|continue");
         case "key_storage_out_of_sync":
             return _t("encryption|enter_recovery_key");
         case "turn_on_key_storage":
@@ -113,7 +114,9 @@ const getSecondaryButtonLabel = (state: DeviceStateForToast): string => {
         case "set_up_recovery":
             return _t("action|dismiss");
         case "verify_this_session":
-            return _t("encryption|verification|unverified_sessions_toast_reject");
+            return isFioBranded()
+                ? _t("fio|seal|later")
+                : _t("encryption|verification|unverified_sessions_toast_reject");
         case "key_storage_out_of_sync":
             return _t("encryption|forgot_recovery_key");
         case "turn_on_key_storage":
@@ -128,6 +131,7 @@ const getDescription = (state: DeviceStateForToast): string | React.ReactNode =>
         case "set_up_recovery":
             return _t("encryption|set_up_recovery_toast_description");
         case "verify_this_session":
+            if (isFioBranded()) return _t("fio|seal|verify_description");
             return _t("encryption|verify_toast_description", undefined, {
                 a: (sub) => (
                     <a

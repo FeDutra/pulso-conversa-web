@@ -21,6 +21,7 @@ import QuickThemeSwitcher from "./QuickThemeSwitcher";
 import Modal from "../../../Modal";
 import DevtoolsDialog from "../dialogs/DevtoolsDialog";
 import { SDKContext } from "../../../contexts/SDKContext.ts";
+import { isFioBranded } from "../../../branding.ts";
 
 const QuickSettingsButton: React.FC<{
     isPanelCollapsed: boolean;
@@ -30,6 +31,7 @@ const QuickSettingsButton: React.FC<{
 
     const currentRoomId = sdkContext.roomViewStore.getRoomId();
     const developerModeEnabled = useSettingValue("developerMode");
+    const isFio = isFioBranded();
 
     let contextMenu: JSX.Element | undefined;
     if (menuDisplayed && handle.current) {
@@ -45,7 +47,7 @@ const QuickSettingsButton: React.FC<{
                 role="region"
                 aria-label={_t("quick_settings|title")}
             >
-                <h2>{_t("quick_settings|title")}</h2>
+                <h2>{isFio ? _t("fio|settings|title") : _t("quick_settings|title")}</h2>
 
                 <AccessibleButton
                     onClick={() => {
@@ -54,7 +56,7 @@ const QuickSettingsButton: React.FC<{
                     }}
                     kind="primary_outline"
                 >
-                    {_t("quick_settings|all_settings")}
+                    {isFio ? _t("fio|settings|open") : _t("quick_settings|all_settings")}
                 </AccessibleButton>
 
                 {currentRoomId && developerModeEnabled && (
@@ -75,7 +77,7 @@ const QuickSettingsButton: React.FC<{
                     </AccessibleButton>
                 )}
 
-                <QuickThemeSwitcher requestClose={closeMenu} />
+                {!isFio && <QuickThemeSwitcher requestClose={closeMenu} />}
             </ContextMenu>
         );
     }

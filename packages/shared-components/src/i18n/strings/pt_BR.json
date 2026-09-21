@@ -13,6 +13,46 @@
     "left_panel": {
         "open_dial_pad": "Abrir o teclado de discagem"
     },
+    "menus": {
+        "user_menu": {
+            "clear_status": "Limpar",
+            "create_an_account": "Criar uma identidade",
+            "got_an_account": "Já tem uma identidade?",
+            "sign_in": "Entrar",
+            "title": "Identidade"
+        }
+    },
+    "room_list": {
+        "collapse_filters": "Recolher filtros",
+        "empty_filter": {
+            "no_chats": "Nenhum fio por aqui.",
+            "no_chats_description": "Comece uma conversa ou abra um círculo.",
+            "no_chats_description_no_room_rights": "Comece uma conversa.",
+            "no_invites": "Nenhum limiar espera por você.",
+            "no_mentions": "Nenhum chamado espera por você.",
+            "no_people": "Você ainda não abriu fios com outras pessoas.",
+            "no_people_description": "Desative o filtro para ver os outros fios.",
+            "no_rooms": "Você ainda não atravessa nenhum círculo.",
+            "no_rooms_description": "Desative o filtro para ver os outros fios.",
+            "no_unread": "Nada novo espera por você.",
+            "show_activity": "Ver todos os sinais",
+            "show_chats": "Ver todos os fios"
+        },
+        "expand_all_sections": "Abrir todas as seções",
+        "expand_filters": "Abrir filtros",
+        "filters": {
+            "favourite": "Guardados",
+            "invites": "Limiares",
+            "low_priority": "Silenciados",
+            "mentions": "Chamados",
+            "people": "Pessoas",
+            "rooms": "Círculos",
+            "unread": "Novos"
+        },
+        "list_title": "Fios",
+        "primary_filters": "Filtros dos fios",
+        "room_options": "Gestos do fio"
+    },
     "time": {
         "about_day_ago": "há aproximadamente um dia",
         "about_hour_ago": "há aproximadamente uma hora",
@@ -28,6 +68,13 @@
         "n_days_ago": "há %(num)s dias",
         "n_hours_ago": "há %(num)s horas",
         "n_minutes_ago": "há %(num)s minutos"
+    },
+    "user_menu": {
+        "link_new_device": "Vincular aparelho",
+        "open_feedback": "Devolver um sinal",
+        "open_home": "Início",
+        "open_security": "Selo e privacidade",
+        "open_settings": "Ajustes"
     },
     "timeline": {
         "m.audio": {
